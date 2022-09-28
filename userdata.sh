@@ -27,3 +27,4 @@ systemctl enable nginx
 
 cp /home/ubuntu/LOG8415E/default /etc/nginx/sites-available
 
+systemctl restart nginx

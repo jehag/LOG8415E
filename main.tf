@@ -111,7 +111,7 @@ resource "aws_alb_listener_rule" "cluster1_rule" {
 
   condition {
     path_pattern {
-      values = ["/cluster1/*"]
+      values = ["/cluster1"]
     }  
   }
 }
@@ -126,7 +126,7 @@ resource "aws_alb_listener_rule" "cluster2_rule" {
 
   condition {
     path_pattern {
-      values = ["/cluster2/*"]
+      values = ["/cluster2"]
     }  
   }
 }
@@ -143,4 +143,9 @@ resource "aws_alb_target_group_attachment" "cluster2_external" {
   target_group_arn = aws_alb_target_group.cluster2.arn
   target_id = each.value.id
   port = 80
+}
+
+output "dns_address" {
+  description = "Application DNS name"
+  value = aws_alb.alb.dns_name
 }

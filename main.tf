@@ -40,3 +40,32 @@ resource "aws_instance" "cluster2_instances" {
   }
 }
 
+resource "aws_vpc" "vpc" {
+  cidr_block = "172.31.0.0/16"
+}
+
+data "aws_subnets" "all" {
+  filter {
+    name   = "vpc-id"
+    values = [aws_vpc.vpc.id]
+  }
+}
+
+resource "aws_security_group" "not_secure_group" {
+  description = "allows everything"
+  vpc_id = aws_vpc.vpc.id
+
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  
+  ingress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}

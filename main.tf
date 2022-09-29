@@ -18,7 +18,7 @@ resource "aws_instance" "cluster1_instances" {
   ami           = "ami-0149b2da6ceec4bb0"
   instance_type = var.instance_type[0]
   availability_zone = var.availability_zone[count.index % 2]
-  user_data = "userdata.sh"
+  user_data = file("userdata.sh")
   vpc_security_group_ids = [aws_security_group.not_secure_group.id]
 
   tags = {
@@ -31,7 +31,7 @@ resource "aws_instance" "cluster2_instances" {
   ami           = "ami-0149b2da6ceec4bb0"
   instance_type = var.instance_type[1]
   availability_zone = var.availability_zone[count.index % 2]
-  user_data = "userdata.sh"
+  user_data = file("userdata.sh")
   vpc_security_group_ids = [aws_security_group.not_secure_group.id]
 
 

@@ -9,6 +9,8 @@ region = requests.get("http://169.254.169.254/latest/dynamic/instance-identity/d
 name = os.popen('aws ec2 describe-tags --region {} --filters "Name=resource-id,Values={}" "Name=key,Values=Name" --output text | cut -f5'.format(region, instance_id)).read()[:-1]
 
 @app.route('/')
+@app.route('/cluster1')
+@app.route('/cluster2')
 def hello_world():
     return name + ' is responding now!'
 

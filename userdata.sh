@@ -5,7 +5,10 @@ apt-get install python3-venv -y
 apt-get install nginx -y
 apt-get install awscli -y
 
-cd /home/ubuntu && git clone https://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@github.com/jehag/LOG8415E.git
+if cd /home/ubuntu/LOG8415E
+then git pull
+else cd /home/ubuntu && git clone https://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@github.com/jehag/LOG8415E.git
+fi
 
 mkdir /home/ubuntu/.aws
 
@@ -27,4 +30,5 @@ systemctl enable nginx
 
 cp /home/ubuntu/LOG8415E/default /etc/nginx/sites-available
 
+systemctl restart flaskapp
 systemctl restart nginx

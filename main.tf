@@ -97,7 +97,7 @@ resource "aws_alb_listener" "listener" {
 
   default_action {    
     target_group_arn = aws_alb_target_group.cluster1.arn
-    type             = "forward"  
+    type             = "forward"
   }
 }
 

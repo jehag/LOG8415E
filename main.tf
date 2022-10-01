@@ -47,13 +47,13 @@ data "aws_vpc" "vpc" {
 data "aws_subnets" "all" {
   filter {
     name   = "vpc-id"
-    values = [aws_vpc.vpc.id]
+    values = [data.aws_vpc.vpc.id]
   }
 }
 
 resource "aws_security_group" "not_secure_group" {
   description = "allows everything"
-  vpc_id = aws_vpc.vpc.id
+  vpc_id = data.aws_vpc.vpc.id
 
   egress {
     from_port = 0
@@ -80,14 +80,14 @@ resource "aws_alb_target_group" "cluster1" {
   name = "cluster1"
   port = 80
   protocol = "HTTP"
-  vpc_id = aws_vpc.vpc.id
+  vpc_id = data.aws_vpc.vpc.id
 }
 
 resource "aws_alb_target_group" "cluster2" {
   name = "cluster2"
   port = 80
   protocol = "HTTP"
-  vpc_id = aws_vpc.vpc.id
+  vpc_id = data.aws_vpc.vpc.id
 }
 
 resource "aws_alb_listener" "listener" {

@@ -40,8 +40,8 @@ resource "aws_instance" "cluster2_instances" {
   }
 }
 
-resource "aws_vpc" "vpc" {
-  cidr_block = "172.31.0.0/16"
+data "aws_vpc" "vpc" {
+  default = true
 }
 
 data "aws_subnets" "all" {

@@ -1,5 +1,5 @@
 terraform init
 terraform apply -auto-approve
-docker build -t python_container .
-docker run -e URL=$(terraform output dns_address) python_container
+docker pull bawsje/log8415e_1:latest
+docker run -e URL=$(terraform output --raw dns_address) bawsje/log8415e_1:latest
 $SHELL

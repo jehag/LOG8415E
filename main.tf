@@ -14,7 +14,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "cluster1_instances" {
-  count         = var.instance_count
+  count         = var.instance_count[0]
   ami           = "ami-0149b2da6ceec4bb0"
   instance_type = var.instance_type[0]
   availability_zone = var.availability_zone[count.index % 2]
@@ -27,7 +27,7 @@ resource "aws_instance" "cluster1_instances" {
 }
 
 resource "aws_instance" "cluster2_instances" {
-  count         = var.instance_count
+  count         = var.instance_count[1]
   ami           = "ami-0149b2da6ceec4bb0"
   instance_type = var.instance_type[1]
   availability_zone = var.availability_zone[count.index % 2]
@@ -36,7 +36,7 @@ resource "aws_instance" "cluster2_instances" {
 
 
   tags = {
-    Name  = "Instance number ${var.instance_count + count.index + 1}"
+    Name  = "Instance number ${var.instance_count[0] + count.index + 1}"
   }
 }
 

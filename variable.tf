@@ -1,5 +1,9 @@
 variable "instance_count" {
-  default = "3"
+  type = list(string)
+  default = [
+    5,
+    4
+    ]
 }
 
 variable "instance_type" {

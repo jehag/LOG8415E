@@ -3,16 +3,12 @@
 apt-get update -y
 apt-get install python3-venv -y
 apt-get install nginx -y
-# apt-get install awscli -y
 
 if cd /home/ubuntu/LOG8415E
 then git pull
 else cd /home/ubuntu && git clone https://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@github.com/jehag/LOG8415E.git
 fi
 
-# mkdir /home/ubuntu/.aws
-
-# cp /home/ubuntu/LOG8415E/credentials /home/ubuntu/.aws
 cp /home/ubuntu/LOG8415E/flaskapp.service /etc/systemd/system
 
 cd /home/ubuntu/LOG8415E

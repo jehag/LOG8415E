@@ -149,3 +149,18 @@ output "dns_address" {
   description = "Application DNS name"
   value = aws_alb.alb.dns_name
 }
+
+output "lb_arn" {
+  description = "Application load balancer arn"
+  value = aws_alb.alb.arn
+}
+
+output "cluster1_arn" {
+  description = "Cluster 1 arn"
+  value = aws_alb_target_group.cluster1.arn
+}
+
+output "cluster2_arn" {
+  description = "Cluster 2 arn"
+  value = aws_alb_target_group.cluster2.arn
+}

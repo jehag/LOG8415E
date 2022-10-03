@@ -21,3 +21,7 @@ variable "availability_zone" {
         "us-east-1d"
     ]
 }
+
+variable "cloudwatch_period" {
+  default = 60
+}

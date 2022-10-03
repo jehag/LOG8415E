@@ -4,27 +4,27 @@ import time
 import os
 
 def firstRequestFunc(url):
-    print("first thread starting 1000 requests")
+    print("first thread starting 1000 requests", flush=True)
     thread_requests(url, 1000)
-    print("first thread completed 1000 requests")
+    print("first thread completed 1000 requests", flush=True)
 
-    print("first thread complete")
+    print("first thread complete", flush=True)
 
 def secondRequestFunc(url):
-    print("second thread starting 500 requests")
+    print("second thread starting 500 requests", flush=True)
     thread_requests(url, 500)
-    print("second thread completed 500 requests")
+    print("second thread completed 500 requests", flush=True)
 
 
-    print("second thread sleeping for 60s")
+    print("second thread sleeping for 60s", flush=True)
     time.sleep(60)
-    print("second thread resuming")
+    print("second thread resuming", flush=True)
 
-    print("second thread starting 1000 requests")
+    print("second thread starting 1000 requests", flush=True)
     thread_requests(url, 1000)
-    print("second thread completed 1000 requests")
+    print("second thread completed 1000 requests", flush=True)
 
-    print("second thread complete")
+    print("second thread complete", flush=True)
 
 def thread_requests(url, count):
     threads = []

@@ -52,6 +52,31 @@ resource "aws_cloudwatch_dashboard" "main" {
                 }
             }
         },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 0,
+            "x": 12,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "HTTPCode_ELB_4XX_Count", "LoadBalancer", aws_alb.alb.arn_suffix ],
+                    [ ".", "HTTPCode_ELB_5XX_Count", ".", "." ]
+                ],
+                "period": var.cloudwatch_period,
+                "region": "us-east-1",
+                "stacked": false,
+                "stat": "Sum",
+                "title": "Load Balancer request failures",
+                "view": "timeSeries",
+                "yAxis": {
+                    "left": {
+                        "label": "Count",
+                        "showUnits": false
+                    }
+                }
+            }
+        },
     ]
 }
   )

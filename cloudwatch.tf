@@ -28,6 +28,30 @@ resource "aws_cloudwatch_dashboard" "main" {
                 }
             }
         },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 0,
+            "x": 6,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "TargetResponseTime", "LoadBalancer", aws_alb.alb.arn_suffix ]
+                ],
+                "period": var.cloudwatch_period,
+                "region": "us-east-1",
+                "stacked": false,
+                "stat": "Average",
+                "title": "Average request response time",
+                "view": "timeSeries",
+                "yAxis": {
+                    "left": {
+                        "label": "Time",
+                        "showUnits": true
+                    }
+                }
+            }
+        },
     ]
 }
   )

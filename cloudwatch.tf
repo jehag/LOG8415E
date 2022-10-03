@@ -202,6 +202,31 @@ resource "aws_cloudwatch_dashboard" "main" {
                 }
             }
         },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 12,
+            "x": 0,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "HealthyHostCount", "TargetGroup", aws_alb_target_group.cluster1.arn_suffix, "LoadBalancer", aws_alb.alb.arn_suffix ],
+                    [ ".", "UnHealthyHostCount", ".", ".", ".", "." ]
+                ],
+                "period": var.cloudwatch_period,
+                "region": "us-east-1",
+                "stacked": false,
+                "stat": "Average",
+                "title": "Cluster 1 host status",
+                "view": "timeSeries",
+                "yAxis": {
+                    "left": {
+                        "label": "Count",
+                        "showUnits": false
+                    }
+                }
+            }
+        },
     ]
 }
   )

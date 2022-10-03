@@ -81,6 +81,11 @@ resource "aws_alb_target_group" "cluster1" {
   port = 80
   protocol = "HTTP"
   vpc_id = data.aws_vpc.vpc.id
+
+  health_check {
+    path = "/cluster1"
+    port = 80
+  }
 }
 
 resource "aws_alb_target_group" "cluster2" {
@@ -88,6 +93,11 @@ resource "aws_alb_target_group" "cluster2" {
   port = 80
   protocol = "HTTP"
   vpc_id = data.aws_vpc.vpc.id
+
+  health_check {
+    path = "/cluster2"
+    port = 80
+  }
 }
 
 resource "aws_alb_listener" "listener" {

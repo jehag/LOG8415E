@@ -127,6 +127,31 @@ resource "aws_cloudwatch_dashboard" "main" {
                 }
             }
         },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 6,
+            "x": 6,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "TargetResponseTime", "TargetGroup", aws_alb_target_group.cluster1.arn_suffix, "LoadBalancer", aws_alb.alb.arn_suffix ],
+                    [ "...", aws_alb_target_group.cluster2.arn_suffix, ".", "." ]
+                ],
+                "period": var.cloudwatch_period,
+                "region": "us-east-1",
+                "stacked": false,
+                "stat": "Average",
+                "title": "Average request response time per target group",
+                "view": "timeSeries",
+                "yAxis": {
+                    "left": {
+                        "label": "Time",
+                        "showUnits": true
+                    }
+                }
+            }
+        },
     ]
 }
   )

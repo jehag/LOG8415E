@@ -177,6 +177,31 @@ resource "aws_cloudwatch_dashboard" "main" {
                 }
             }
         },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 6,
+            "x": 18,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "RequestCountPerTarget", "TargetGroup", aws_alb_target_group.cluster1.arn_suffix, "LoadBalancer", aws_alb.alb.arn_suffix ],
+                    [ "...", aws_alb_target_group.cluster2.arn_suffix, ".", "." ]
+                ],
+                "period": var.cloudwatch_period,
+                "region": "us-east-1",
+                "stacked": false,
+                "stat": "Sum",
+                "title": "Average request count per instance",
+                "view": "timeSeries",
+                "yAxis": {
+                    "left": {
+                        "label": "Count",
+                        "showUnits": false
+                    }
+                }
+            }
+        },
     ]
 }
   )

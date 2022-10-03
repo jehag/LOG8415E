@@ -102,6 +102,31 @@ resource "aws_cloudwatch_dashboard" "main" {
                 }
             }
         },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 6,
+            "x": 0,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "RequestCount", "TargetGroup", aws_alb_target_group.cluster1.arn_suffix, "LoadBalancer", aws_alb.alb.arn_suffix ],
+                    [ "...", aws_alb_target_group.cluster2.arn_suffix, ".", "." ]
+                ],
+                "period": var.cloudwatch_period,
+                "region": "us-east-1",
+                "stacked": false,
+                "stat": "Sum",
+                "title": "Request count per target group",
+                "view": "timeSeries",
+                "yAxis": {
+                    "left": {
+                        "label": "Count",
+                        "showUnits": false
+                    }
+                }
+            }
+        },
     ]
 }
   )

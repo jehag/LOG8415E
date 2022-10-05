@@ -1,10 +1,10 @@
 import os
-import requests
+import send_requests
 from flask import Flask
 
 app = Flask(__name__)
 
-instance_id = requests.get('http://169.254.169.254/latest/meta-data/instance-id').text
+instance_id = send_requests.get('http://169.254.169.254/latest/meta-data/instance-id').text
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')

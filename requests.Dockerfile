@@ -10,9 +10,7 @@ RUN apt-get update && apt-get install -y \
   && rm -rf /var/lib/apt/lists/*
 
 RUN wget --quiet https://releases.hashicorp.com/terraform/1.3.1/terraform_1.3.1_linux_amd64.zip \
-  && unzip terraform_1.3.1_linux_amd64.zip \
-  && mv terraform /usr/bin \
-  && rm terraform_1.3.1_linux_amd64.zip
+  && mv terraform_1.3.1_linux_amd64.zip /usr/bin
 
 RUN pip3 install requests \
     boto3 \

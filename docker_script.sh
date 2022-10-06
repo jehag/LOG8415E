@@ -1,4 +1,7 @@
 #!/bin/bash
+unzip /usr/bin/terraform_1.3.1_linux_amd64.zip \
+  && rm /usr/bin/terraform_1.3.1_linux_amd64.zip
+
 echo
 terraform init
 terraform apply -auto-approve

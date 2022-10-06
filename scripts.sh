@@ -1,2 +1,2 @@
-docker build -f ./requests.Dockerfile -t everything_container .
-docker run -e AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id) -e AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key) -e AWS_SESSION_TOKEN=$(aws configure get aws_session_token) everything_container
+docker pull bawsje/log8415e_1:latest
+docker run -e AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id) -e AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key) -e AWS_SESSION_TOKEN=$(aws configure get aws_session_token) bawsje/log8415e_1:latest

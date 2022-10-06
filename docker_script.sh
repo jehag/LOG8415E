@@ -1,6 +1,11 @@
 #!/bin/bash
+
+# unzip terraform in usr/bin
+cd /usr/bin
 unzip /usr/bin/terraform_1.3.1_linux_amd64.zip \
   && rm /usr/bin/terraform_1.3.1_linux_amd64.zip
+
+cd /usr/app/src
 
 echo
 terraform init

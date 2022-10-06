@@ -1,6 +1,2 @@
-terraform init
-terraform apply -auto-approve
-docker pull bawsje/log8415e_1:latest
-DOCKER_ID=$(docker run -d -e URL=$(terraform output --raw dns_address) bawsje/log8415e_1:latest)
-docker logs -f $DOCKER_ID
-$SHELL
+docker build -f ./requests.Dockerfile -t everything_container .
+docker run -e AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id) -e AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key) -e AWS_SESSION_TOKEN=$(aws configure get aws_session_token) everything_container

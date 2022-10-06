@@ -16,7 +16,9 @@ def access_last_data_metric(metricname, targetGroup, loadBalancer):
     if 'REQUESTS_START' in os.environ:
         start = datetime.utcfromtimestamp(int(os.environ['REQUESTS_START']))
 
-    print(end - start)
+    dimension = [ { 'Name': 'LoadBalancer', 'Value': loadBalancer } ]
+    if targetGroup != None: dimension.append({ 'Name': 'TargetGroup', 'Value': targetGroup })
+    
     response = cloudwatch_client.get_metric_data(
         MetricDataQueries=[
             {
@@ -25,16 +27,7 @@ def access_last_data_metric(metricname, targetGroup, loadBalancer):
                     'Metric': {
                         'Namespace': 'AWS/ApplicationELB',
                         'MetricName': metricname,
-                        'Dimensions': [
-                            {
-                                'Name': 'TargetGroup',
-                                'Value': targetGroup
-                            },
-                            {                        
-                                'Name': 'LoadBalancer',
-                                'Value': loadBalancer
-                            },
-                        ]
+                        'Dimensions': dimension
                     },
                     'Period': 60,
                     'Stat': 'Average' if metricname == 'TargetResponseTime' else 'Sum',
@@ -53,25 +46,33 @@ if __name__ == "__main__":
     cluster1 = os.popen('terraform output --raw cluster1_arn_suffix').read()
     cluster2 = os.popen('terraform output --raw cluster2_arn_suffix').read()
 
-    metricNames = ['RequestCount', 'TargetResponseTime', 'HTTPCode_Target_2XX_Count', 'HTTPCode_Target_4XX_Count']
+    metric_names = ['RequestCount', 'TargetResponseTime', 'HTTPCode_Target_2XX_Count', 'HTTPCode_Target_4XX_Count']
     headers = ['Target', 'Request count', 'Average response time (s)', 'Status 2XX', 'Status 4XX']
     cluster1_data = ['Cluster1']
     cluster2_data = ['Cluster2']
     total_data = ['Total']
 
-
-
-    for metric in metricNames:
+    #clusters metrics
+    for metric in metric_names:
         cluster1_data.append(handler(metric, cluster1, lb))
         cluster2_data.append(handler(metric, cluster2, lb))
 
-    total_data.append(cluster1_data[1] + cluster2_data[1])
-    total_data.append((cluster1_data[2] + cluster2_data[2])/2)
-    total_data.append(cluster1_data[3] + cluster2_data[3])
-    total_data.append(cluster1_data[4] + cluster2_data[4])
-
-    benchmark = tabulate([cluster1_data, cluster2_data, total_data], headers=headers)
+    benchmark = tabulate([cluster1_data, cluster2_data], headers=headers)
     print(benchmark)
 
+    print() # newline for prettier formatting
+
+    # load balancer metrics
+    lb_metric_names = ['RequestCount', 'TargetResponseTime', 'HTTPCode_ELB_2XX_Count', 'HTTPCode_ELB_4XX_Count', 'HTTPCode_ELB_5XX_Count']
+    lb_headers = ['Request count', 'Average response time (s)', 'Status 2XX', 'Status 4XX', 'Status 5XX']
+    lb_data = ['Load balancer']
+
+    for metric in lb_metric_names:
+        lb_data.append(handler(metric, None, lb))
+
+    lb_benchmark = tabulate([lb_data], headers=headers)
+    print(lb_benchmark)
+
+
     if 'BENCHMARK_START' in os.environ:
-        print('total run time (s): ' + str((datetime.utcnow() - datetime.utcfromtimestamp(int(os.environ['REQUESTS_START']))).total_seconds()))
+        print('total time since requests sent (s): ' + str((datetime.utcnow() - datetime.utcfromtimestamp(int(os.environ['REQUESTS_START']))).total_seconds()))

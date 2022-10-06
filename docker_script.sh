@@ -2,8 +2,8 @@
 
 # unzip terraform in usr/bin
 cd /usr/bin
-unzip terraform_1.3.1_linux_amd64.zip \
-  && rm terraform_1.3.1_linux_amd64.zip
+unzip terraform_1.3.1_linux_amd64.zip
+rm terraform_1.3.1_linux_amd64.zip
 
 cd /usr/app/src
 

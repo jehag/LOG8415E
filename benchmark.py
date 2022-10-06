@@ -70,7 +70,7 @@ if __name__ == "__main__":
     for metric in lb_metric_names:
         lb_data.append(handler(metric, None, lb))
 
-    lb_benchmark = tabulate([lb_data], headers=headers)
+    lb_benchmark = tabulate([lb_data], headers=lb_headers)
     print(lb_benchmark)
 
 

@@ -24,8 +24,8 @@ COPY cloudwatch.tf ./
 COPY main.tf ./
 COPY variable.tf ./
 COPY userdata.sh ./
-COPY script.sh ./
+COPY docker_script.sh ./
 COPY send_requests.py ./
 COPY benchmark.py ./
 
-CMD ./script.sh
+CMD bash docker_script.sh

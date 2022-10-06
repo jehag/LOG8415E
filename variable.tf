@@ -9,8 +9,8 @@ variable "instance_count" {
 variable "instance_type" {
   type = list(string)
   default = [
-    "t2.micro",
-    "t1.micro"
+    "m4.large",
+    "t2.large"
     ]
 }
 

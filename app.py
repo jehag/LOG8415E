@@ -1,4 +1,3 @@
-import os
 import send_requests
 from flask import Flask
 

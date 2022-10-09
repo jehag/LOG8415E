@@ -1,8 +1,8 @@
 variable "instance_count" {
   type = list(string)
   default = [
-    5,
-    4
+    4,
+    5
     ]
 }
 

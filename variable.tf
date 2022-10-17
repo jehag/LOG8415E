@@ -1,3 +1,8 @@
+/*
+ * instance counts for clusters
+ * instance_count[0] is the number of instance in cluster 1
+ * instance_count[1] is the number of instance in cluster 2
+ */
 variable "instance_count" {
   type = list(string)
   default = [
@@ -6,6 +11,11 @@ variable "instance_count" {
     ]
 }
 
+/*
+ * instance type for clusters
+ * instance_type[0] is the type of instance in cluster 1
+ * instance_type[1] is the type of instance in cluster 2
+ */
 variable "instance_type" {
   type = list(string)
   default = [
@@ -14,6 +24,10 @@ variable "instance_type" {
     ]
 }
 
+/*
+ * availability zones for clusters
+ * each cluster will contain instances from both availability zones
+ */
 variable "availability_zone" {
     type = list(string)
     default = [

@@ -1,3 +1,7 @@
+/*
+ * Cloudwatch dashboard initialisation. 
+ * Contains metrics data from the load balancer and the target groups
+ */
 resource "aws_cloudwatch_dashboard" "main" {
   dashboard_name = "my-dashboard"
 

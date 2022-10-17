@@ -1,3 +1,5 @@
+# service file for the flask app. 
+# on start, the service will run the flask app and serve it on localhost:8000 with gunicorn
 [Unit]
 Description=Gunicorn instance for a flask app
 After=network.target
